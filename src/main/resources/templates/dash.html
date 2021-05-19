@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="description" content="File Manager - Dashboard">
+<meta name="keyword"
+	content="Spring,Thymeleaf,Bootstrap,jQuery,CSS,HTML">
+<title>Document Manager</title>
+<!-- Icons-->
+<link
+	th:href="@{../node_modules/@coreui/icons/css/coreui-icons.min.css}"
+	rel="stylesheet" type="text/css">
+<link th:href="@{../node_modules/flag-icon-css/css/flag-icon.min.css}"
+	rel="stylesheet" type="text/css">
+<link th:href="@{../node_modules/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	th:href="@{../node_modules/simple-line-icons/css/simple-line-icons.css}"
+	rel="stylesheet" type="text/css">
+<link
+	th:href="@{../node_modules/@fortawesome/fontawesome-free/css/all.css}"
+	rel="stylesheet" type="text/css">
+<!-- Main styles for this application-->
+<link th:href="@{../css/style.css}" rel="stylesheet" type="text/css">
+<link th:href="@{../vendors/pace-progress/css/pace.min.css}"
+	rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function OnSubmitForm()
+{
+   var docCategory= document.getElementById("docCategory").value;
+   document.userform.action="/uploadFile";
+   return true;
+}
+</script>
+
+</head>
+<style>
+.topleft {
+	position: absolute;
+	top: 80px;
+	left: 100px;
+	font-size: 18px;
+}
+
+.topleft1 {
+	position: absolute;
+	top: 80px;
+	left: 400px;
+	font-size: 18px;
+}
+
+.topleft2 {
+	position: absolute;
+	top: 180px;
+	left: 410px;
+	font-size: 18px;
+}
+
+.topright {
+	position: absolute;
+	top: 24px;
+	right: 126px;
+	font-size: 21px;
+}
+
+.topright1 {
+	position: absolute;
+	top: 180px;
+	left: 600px;
+	font-size: 18px;
+}
+
+.topright2 {
+	position: absolute;
+	top: 90px;
+	right: 76px;
+	font-size: 18px;
+}
+
+.card {
+	margin: 0 auto; /* Added */
+	float: none; /* Added */
+	margin-bottom: 10px; /* Added */
+}
+
+h3 {
+	text-align: center;
+}
+
+h6 {
+	text-align: center;
+}
+</style>
+
+<body class="app header-fixed sidebar-fixed sidebar-lg-show"
+	ng-app="app" ng-controller="controller" data-ng-init="getData()">
+	<header class="app-header navbar navbar-expand-xl">
+
+		<h2>Document Management System</h2>
+		<h2 class="nav ml-auto mr-5" th:text="${iduser}">Id</h2>
+		<ul class="nav ml-auto mr-5">
+			<li>
+				<div th:fragment="logout" class="logout"
+					sec:authorize="isAuthenticated()">
+					<div>
+						<form th:action="@{/logout}" method="post">
+							<button class="btn btn-primary" type="submit">
+								<i class="fas fa-sign-out-alt mr-2"></i><span>Logout</span>
+							</button>
+						</form>
+					</div>
+				</div>
+
+			</li>
+		</ul>
+	</header>
+	<div class="app-body">
+		<div class="sidebar">
+			<nav class="sidebar-nav">
+				<ul class="nav">
+					<li class="nav-item"><a class="nav-link" > <i
+							class="nav-icon icon-speedometer"></i> Dashboard
+					</a></li>
+					<li class="nav-item nav-dropdown"><a
+						class="nav-link nav-dropdown-toggle" href="#"> <i
+							class="nav-icon icon-cursor"></i> Documents
+					</a>
+						<ul class="nav-dropdown-items">
+							<li class="nav-item"><a class="nav-link" href="list"> <i
+									class="nav-icon icon-cursor"></i> View Documents
+							</a></li>
+							<li class="nav-item"><a class="nav-link" href="index"> <i
+									class="nav-icon icon-cursor"></i> Download Documents
+							</a></li>
+
+						</ul></li>
+				</ul>
+			</nav>
+		</div>
+
+		<main class="main">
+			<!-- Breadcrumb-->
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">Home</li>
+
+
+				</li>
+				<li class="breadcrumb-item active">Dashboard</li>
+			</ol>
+			<div class="card">
+				<div class="card-body">
+
+					<h3 style="text-align: center" class="topLeft">Upload your
+						Documents:</h3>
+					<div style="text-align: center" class="card">
+						<div class="card-body">
+							<form th:action="@{'/uploadFile'}" method="post"
+								enctype="multipart/form-data" class="card-body"
+								onsubmit="return OnSubmitForm();" th:object="${Document}"
+								name="userform">
+								<div class="custom-file" style="width: inherit">
+									<input style="text-align: center" type="file"
+										class="custom-file-input" id="validatedCustomFile" name="file"
+										accept="application/pdf,.txt" required> <label
+										class="custom-file-label" for="validatedCustomFile">Select
+										File </label>
+									<div style="text-align: center" class="invalid-feedback">Please
+										Select File</div>
+								</div>
+								<input style="text-align: center"
+									class="btn btn-outline-primary" type="submit" value="Upload">
+								<br></br>
+								<div>
+									<div style="max-width: 22rem;"
+										class="card text-black bg-secondary mb-3">
+										<div class="card-body">
+											<h4 style="text-align: center">Enter Document Category:</h4>
+											<input style="text-align: center" type="text"
+												class="custom-text-input" id="docCategory"
+												name="docCategory" required>
+										</div>
+									</div>
+								</div>
+
+
+
+							</form>
+
+
+							<h5 style="text-align: center">
+								<span class="text-success" th:utext="${message}"></span>
+							</h5>
+
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	</div>
+
+	</main>
+	</div>
+	<footer class="app-footer"> </footer>
+	<!-- Bootstrap and necessary plugins-->
+	<script th:src="@{../node_modules/jquery/dist/jquery.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{../node_modules/popper.js/dist/umd/popper.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{../node_modules/bootstrap/dist/js/bootstrap.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{../js/angular.min.js}" type="text/javascript"></script>
+	<script th:src="@{../js/controller.js}" type="text/javascript"></script>
+	<script
+		th:src="@{../node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js}"
+		type="text/javascript"></script>
+	<script
+		th:src="@{../node_modules/@coreui/coreui/dist/js/coreui.min.js}"
+		type="text/javascript"></script>
+	<script
+		th:src="@{../node_modules/@fortawesome/fontawesome-free/js/all.js}"
+		type="text/javascript"></script>
+	<!-- Plugins and scripts required by this view-->
+	<script
+		th:src="@{../node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js}"
+		type="text/javascript"></script>
+	<script th:src="@{../js/main.js}" type="text/javascript"></script>
+</body>
+
+</html>

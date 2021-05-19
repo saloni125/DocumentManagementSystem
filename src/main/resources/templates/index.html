@@ -1,0 +1,113 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Home</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	th:href="@{css/login-register-form.css}">
+<link th:rel="stylesheet"
+	th:href="@{assets/bootstrap-select-1.13.9/dist/css/bootstrap-select.css}" />
+<link th:rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " />
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+function OnSubmitForm()
+{
+   var docId = document.getElementById("docId").value;
+   document.userform.action="/download/"+docId;
+   return true;
+}
+</script>
+</head>
+<body>
+
+	<style>
+body {
+	/* background-image:
+		url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_RySaENVXNSvaTzIEdp-rLNPyrLRaNa_pMw&usqp=CAU);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover; */
+	
+}
+
+.topleft {
+	position: absolute;
+	top: 20px;
+	left: 25px;
+	font-size: 22px;
+}
+
+.topleft1 {
+	position: absolute;
+	top: 90px;
+	left: 25px;
+	font-size: 22px;
+}
+
+.topleft2 {
+	position: absolute;
+	top: 180px;
+	left: 25px;
+	font-size: 22px;
+}
+
+.topright {
+	position: absolute;
+	top: 20px;
+	right: 176px;
+	font-size: 22px;
+}
+
+.topright1 {
+	position: absolute;
+	top: 80px;
+	right: 200px;
+	font-size: 22px;
+}
+
+.topright2 {
+	position: absolute;
+	top: 130px;
+	right: 476px;
+	font-size: 22px;
+}
+
+h3 {
+	text-align: center;
+}
+
+h6 {
+	text-align: center;
+}
+</style>
+
+	<div class="card text-white bg-primary mb-3" >
+		<div class="card-body">
+			<ul class="list-group">
+				<h3>
+					Download your documents:
+				</h3>
+
+				<!-- <h3 style="text-align: center">Download your documents:</h3> -->
+				<h6 style="text-align: center">Enter Document Id-</h6>
+				<form name="userform" method="get" enctype="multipart/form-data"
+					onsubmit="return OnSubmitForm();" class="topright2">
+					<div class="custom-text" style="width: inherit">
+						<input type="text" class="custom-text-input" id="docId"
+							name="docId" required> <input
+							class="btn btn-outline-primary" type="submit" value="Download">
+				</form>
+
+			</ul>
+		</div>
+	</div>
+
+</body>
+</html>

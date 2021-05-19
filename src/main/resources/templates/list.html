@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link
+	th:href="@{../node_modules/@coreui/icons/css/coreui-icons.min.css}"
+	rel="stylesheet" type="text/css">
+<link th:href="@{../node_modules/flag-icon-css/css/flag-icon.min.css}"
+	rel="stylesheet" type="text/css">
+<link th:href="@{../node_modules/font-awesome/css/font-awesome.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	th:href="@{../node_modules/simple-line-icons/css/simple-line-icons.css}"
+	rel="stylesheet" type="text/css">
+<link
+	th:href="@{../node_modules/@fortawesome/fontawesome-free/css/all.css}"
+	rel="stylesheet" type="text/css">
+<!-- Main styles for this application-->
+<link th:href="@{../css/style.css}" rel="stylesheet" type="text/css">
+<link th:href="@{../vendors/pace-progress/css/pace.min.css}"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h1 class="text-center">My Documents</h1>
+
+	<div class="card">
+		<div class="card-body">
+			<ul class="list-group">
+				<li class="list-group-item bg-primary">
+					<div class="row">
+						
+						<div class="col-md-1 border-right">
+							<p class="text mb-0">Document Id:</p>
+						</div>
+						<div class="col-md-5 border-right">
+							<p class="text mb-0">Document Name:</p>
+						</div>
+						<div class="col-md-3 border-right">
+							<p class="text mb-0">Document Type:</p>
+						</div>
+						<div class="col-md-2 border-right">
+							<p class="text mb-0">Document Category:</p>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+	
+					<table class="table table-striped">
+						
+						<tr th:each="d : ${documents}">
+							<td th:text="${d.docId}"></td>
+							<td th:text="${d.docName}"></td>
+							<td th:text="${d.docType}"></td>
+							<td th:text="${d.docCategory}"></td>
+						</tr>
+					</table>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+</body>
+</html>
